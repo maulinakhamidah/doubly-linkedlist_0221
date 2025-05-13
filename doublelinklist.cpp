@@ -56,7 +56,7 @@ void addNode()
         while (current != NULL && current->noMhs < newNode->noMhs)
         {                     // step 1.c: traverse the list to find the
         previous = current;   // step 1.d: move the previous to the current
-        current = current->next // stepp1.e: move the current to the next
+        current = current->next; // stepp1.e: move the current to the next
         }
 
         // set nilai next node baru = current dan prev node baru= pprevious
@@ -80,7 +80,7 @@ void addNode()
             // if prev is still NULL, it means newNode is now the first node
             START = newNode;
         }
-
+    }
 
 
     
@@ -103,93 +103,104 @@ bool search(int rollNo, Node **previous, Node **current)
 
 }
 
-// pembuatan prosedur delete untuk menghapus data
+// pembuatan prosedure delete untuk menghapus data
 void deleteNode()
 {
-    Node *previous, *current;
-    int rollNo; 
+   Node *previous, *current;
+   int rollNo;
+   
+   cout << "\nEnter the roll number of the student whose record is to be deleted : " << endl;
+   cin >> rollNo; // step 3: get the roll number number to be deleted
 
-    cout << "\nEnter the roll number of the student whose record is to be delete: ";
-    cin >> rollNo; // step 3: get the roll number number to be delete
-
-    if (START == NULL)
-    {
-        cout << " List is empaty" << endl;
+   if (START == NULL)
+   {
+        cout << "List is empty" << endl;
         return;
-    }
+   }
 
-    current = START; // step 1: start from the first node
-    previous = NULL; 
+   current = START; // step 1: start from the first node
+   previous = NULL; 
 
-    // locate the node to be delete
-    while (current != NULL && current->noMhs != rollNo)
-    {
-        previous = current;
-        current = current->nextp;
-    }
+   // Located the node to be deleted 
+   while (current != NULL && current->noMhs != rollNo)
+   {
+    cout << "\033[31mThe record with roll number " << rollNo << " not found\033[0m" << endl;
+    return;
+   }
 
-    if (current == NULL)
-    {
-        cout << "\033[31mThe record with roll number " << rollNo << " not found\033[0m " << endl;
-        return;
-    }
-
-    // Node to be delete in the first node
-    if (current = START)
-      {
-        START = START->next; // step 2: update the START pointer
+   // node to be deleted in the first node 
+   if (current =START)
+   {
+        START = START->next; // step 2: update the START pointer 
         if (START != NULL)
         {
             START->prev = NULL;
         }
-
-      }
-      else
-      {
-        // node to be deleted is not the first node
+   }
+   else 
+   { // node to be deleted is not the first node
         previous->next = current->next;
-        if (current-> != NULL)
-        {
-            // if 
+        if (current->next != NULL)
+        { // if there's a successor, update its prev pointer
             current->next->prev = previous;
-
         }
-      }
-      // release the memory of the node marked as current
-      delete current;
-      cout << "\x1b[32mRecord with roll number " << rollNo << " deleted\x1b[0m" << endl;
-      }
+   }
+   // relase the memory of the node marked as current
+   delete current;
+   cout << "\x1b[32mRecord with roll number " << rollNo << " deleted\x1b[0m " << endl;
+}
 
-      // method untuk mengecek apakah list kosong
-      bool listEmpaty()
-      {
-        return (START == NULL);
-      }
+// method untuk mengecek apakah list kosong
+bool listEmpty()
+{
+    return (START == NULL);
+}
 
-      // prosedur traverse untuk menampilkan data urutan terbalik
-      void revtraverse()
-      {
-        if (listEmpaty)
-        cout <<"\nRecords in descending order of roll number are:" << endl;
+// prosedur traverse untuk menampilkan data secara urut 
+void traverse()
+{
+    if (listEmpty())
+        cout << "\nList is Empty " << endl;
+  
+    else
+    {
+        cout << "\nData didalam list adalah :\n";
+        Node *currentNode = START;
+        while (currentNode != NULL)
+        {
+            cout << currentNode->noMhs << endl;
+            currentNode = currentNode->next;
+        }
+        cout << endl;
+    }
+}
+
+// prosedur untuk menampilkan data secara urutan terbalik
+void revtraverse()
+{
+    if (listEmpty())
+        cout << "\nList is Empty " << endl;
+    else
+    {
+        cout << "\nRecords in descending order of roll number are : " << endl;
         Node *currentNode = START;
         while (currentNode->next != NULL)
-            currentNode = currentNode->next
-
-            while (currentNode !=  NULL)
-            {
-                cout << currentNode->noMhs << " " << currentNode->name << endl;
-                currentNode = currentNode->prev;
-            }
-      }
-
+            currentNode = currentNode->next;
+        
+        while (currentNode != NULL)
+        {
+            cout << currentNode->noMhs << " " << currentNode->name << endl;
+            currentNode = currentNode->prev;
+        }
+    }
 }
 
 // prosedur untuk mencari data dan menapilkan data yang dicari jika ada
 void searchData()
 {
-    if (listEmpaty() == true)
+    if (listEmpty() == true)
     {
-        cout << "\nList is empaty" << endl;
+        cout << "\nList is empty" << endl;
     }
     Node *prev, *curr;
     prev = curr = NULL;
@@ -233,7 +244,7 @@ int main()
                 case '2':
                 deleteNode();
                 break;
-                case '3'
+                case '3':
                 traverse();
                 break;
                 case '4':
@@ -247,8 +258,6 @@ int main()
                 default:
                 cout << "\nInvalid option" << endl;
                 break;
-
-
             }
         }
         catch (exception &e)
