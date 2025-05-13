@@ -121,6 +121,23 @@ void deleteNode()
     current = START; // step 1: start from the first node
     previous = NULL; 
 
+    // locate the node to be delete
+    while (current != NULL && current->noMhs != rollNo)
+    {
+        previous = current;
+        current = current->nextp;
+    }
+
+    if (current == NULL)
+    {
+        cout << "\033[31mThe record with roll number " << rollNo << " not found\033[0m " << endl;
+        return;
+    }
+
+    // Node to be delete in the first node
+    if (current = START)
+    
+
 }
 
 
