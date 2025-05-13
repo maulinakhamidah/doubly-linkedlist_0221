@@ -39,7 +39,51 @@ void addNode()
             START->prev = newNode;
         }
 
-
-
+        // memberi nilai prev = null dan start = node baru 
+        newNode->prev = NULL; // step 5: mode the new node point to NULL
+        START = newNode;   // step 6: make the new node the first node
     }
+    //kondisi jika semua kondisi if untuk terpenuhi
+    else
+    {
+
+        // insert the new node in the middle or at the end
+        // set nilai current = strat dan nilai previous = null
+        Node *current = START; // step 1.a: step from the first node
+        Node *previous = NULL; // step 1.b: previoud node is Null inotially
+
+        // looping selama current != null dan noMhs dari current lebih kecil dari
+        while (current != NULL && current->noMhs < newNode->noMhs)
+        {                     // step 1.c: traverse the list to find the
+        previous = current;   // step 1.d: move the previous to the current
+        current = current->next // stepp1.e: move the current to the next
+        }
+
+        // set nilai next node baru = current dan prev node baru= pprevious
+        newNode-> next = current; // step 4: make teh next filed of the new node
+        newNode-> prev = previous;  // step 5: make the previous filed of the new node
+
+        // kondisi jika current tidak sama dengan null
+        if (current != NULL)
+        {
+            current ->prev = newNode; // step 6 make the previous filed of the
+        }
+
+        // kondisi jika previous tidak sama dengan null
+        if (previous != NULL)
+        {
+            previous->next = newNode; // step 7: make the next filed of the prev
+        }
+        // kondisi jika if previous sama dengan null
+        else
+        {
+            // if prev is still NULL, it means newNode is now the first node
+            START = newNode;
+        }
+
+
+
+    
+
+    
 }
